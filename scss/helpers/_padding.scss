@@ -1,0 +1,27 @@
+// 區塊間距
+$padding: (
+  p: 'padding',
+  pt: 'padding-top',
+  pb: 'padding-bottom',
+  pl: 'padding-left',
+  pr: 'padding-right',
+  px: '',
+  py: ''
+);
+
+@each $name, $value in $padding {
+  @for $i from 1 through 5 {
+    .#{ $name }-#{ $i } {
+      @if $name == 'px' {
+        padding-left: 10px * $i;
+        padding-right: 10px * $i;
+      } @else if $name == 'py' {
+        padding-top: 10px * $i;
+        padding-bottom: 10px * $i;
+      } @else {
+        #{ $value }: 10px * $i;
+      }
+    }
+  }
+}
+// ------------------------------------

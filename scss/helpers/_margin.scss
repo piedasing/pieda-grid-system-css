@@ -1,0 +1,27 @@
+// 區塊間距
+$margin: (
+  m: 'margin',
+  mt: 'margin-top',
+  mb: 'margin-bottom',
+  ml: 'margin-left',
+  mr: 'margin-right',
+  mx: '',
+  my: ''
+);
+
+@each $name, $value in $margin {
+  @for $i from 1 through 5 {
+    .#{ $name }-#{ $i } {
+      @if $name == 'mx' {
+        margin-left: 10px * $i;
+        margin-right: 10px * $i;
+      } @else if $name == 'my' {
+        margin-top: 10px * $i;
+        margin-bottom: 10px * $i;
+      } @else {
+        #{ $value }: 10px * $i;
+      }
+    }
+  }
+}
+// ------------------------------------

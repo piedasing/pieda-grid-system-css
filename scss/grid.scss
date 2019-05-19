@@ -1,0 +1,59 @@
+@mixin colWidth($col: 1) {
+  $width: 100% / (12 / $col);
+  flex: 0 0 $width;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.row {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@for $i from 1 through 12 {
+  .col-#{ $i } {
+    max-width: 100%;
+    @include colWidth($i);
+  }
+}
+
+@media only screen and (min-width: 576px) {
+  @for $i from 1 through 12 {
+    .col-sm-#{ $i } {
+      max-width: 100%;
+      @include colWidth($i);
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  @for $i from 1 through 12 {
+    .col-md-#{ $i } {
+      max-width: 100%;
+      @include colWidth($i);
+    }
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  @for $i from 1 through 12 {
+    .col-lg-#{ $i } {
+      max-width: 100%;
+      @include colWidth($i);
+    }
+  }
+}
+
+@media only screen and (min-width: 1140px) {
+  @for $i from 1 through 12 {
+    .col-xl-#{ $i } {
+      max-width: 100%;
+      @include colWidth($i);
+    }
+  }
+}
