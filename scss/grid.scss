@@ -1,10 +1,5 @@
 $total_col: 12;
 
-@mixin colWidth($col: 1) {
-  $width: 100% / ($total_col / $col);
-  flex: 0 0 $width;
-}
-
 .container {
   width: 100%;
   max-width: 1200px;
@@ -18,9 +13,11 @@ $total_col: 12;
 }
 
 @for $i from 1 through $total_col {
+  $width: 100% / ($total_col / $i);
+
   .col-#{ $i } {
     max-width: 100%;
-    @include colWidth($i);
+    flex: 0 0 $width;
   }
 }
 
@@ -34,9 +31,11 @@ $mediaQuery: (
 @each $name, $value in $mediaQuery {
   @media only screen and (min-width: $value) {
     @for $i from 1 through $total_col {
+      $width: 100% / ($total_col / $i);
+
       .col-#{ $name }-#{ $i } {
         max-width: 100%;
-        @include colWidth($i);
+        flex: 0 0 $width;
       }
     }
   }
