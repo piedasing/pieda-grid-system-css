@@ -1,5 +1,7 @@
+$total_col: 12;
+
 @mixin colWidth($col: 1) {
-  $width: 100% / (12 / $col);
+  $width: 100% / ($total_col / $col);
   flex: 0 0 $width;
 }
 
@@ -15,45 +17,27 @@
   flex-wrap: wrap;
 }
 
-@for $i from 1 through 12 {
+@for $i from 1 through $total_col {
   .col-#{ $i } {
     max-width: 100%;
     @include colWidth($i);
   }
 }
 
-@media only screen and (min-width: 576px) {
-  @for $i from 1 through 12 {
-    .col-sm-#{ $i } {
-      max-width: 100%;
-      @include colWidth($i);
-    }
-  }
-}
+$mediaQuery: (
+  sm: 576,
+  md: 768,
+  lg: 992,
+  xl: 1140
+);
 
-@media only screen and (min-width: 768px) {
-  @for $i from 1 through 12 {
-    .col-md-#{ $i } {
-      max-width: 100%;
-      @include colWidth($i);
-    }
-  }
-}
-
-@media only screen and (min-width: 992px) {
-  @for $i from 1 through 12 {
-    .col-lg-#{ $i } {
-      max-width: 100%;
-      @include colWidth($i);
-    }
-  }
-}
-
-@media only screen and (min-width: 1140px) {
-  @for $i from 1 through 12 {
-    .col-xl-#{ $i } {
-      max-width: 100%;
-      @include colWidth($i);
+@each $name, $value in $mediaQuery {
+  @media only screen and (min-width: $value) {
+    @for $i from 1 through $total_col {
+      .col-#{ $name }-#{ $i } {
+        max-width: 100%;
+        @include colWidth($i);
+      }
     }
   }
 }
