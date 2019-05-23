@@ -1,3 +1,4 @@
+@import '../variable';
 // 區塊間距
 $margin: (
   m: 'margin',
@@ -13,15 +14,56 @@ $margin: (
   @for $i from 1 through 5 {
     .#{ $name }-#{ $i } {
       @if $name == 'mx' {
-        margin-left: 10px * $i;
-        margin-right: 10px * $i;
+        margin-left: $unit * $i;
+        margin-right: $unit * $i;
       } @else if $name == 'my' {
-        margin-top: 10px * $i;
-        margin-bottom: 10px * $i;
+        margin-top: $unit * $i;
+        margin-bottom: $unit * $i;
       } @else {
-        #{ $value }: 10px * $i;
+        #{ $value }: $unit * $i;
       }
+    }
+  }
+  .#{ $name }-auto {
+    @if $name == 'mx' {
+      margin-left: auto;
+      margin-right: auto;
+    } @else if $name == 'my' {
+      margin-top: auto;
+      margin-bottom: auto;
+    } @else {
+      #{ $value }: auto
     }
   }
 }
 // ------------------------------------
+@each $name, $value in $mediaQuery {
+  @media only screen and (min-width: $value) {
+    @each $m_name, $m_value in $margin {
+      @for $i from 1 through 5 {
+        #{ $m_name }-#{ $name }-#{ $i } {
+          @if $m_name == 'mx' {
+            margin-left: $unit * $i;
+            margin-right: $unit * $i;
+          } @else if $m_name == 'my' {
+            margin-top: $unit * $i;
+            margin-bottom: $unit * $i;
+          } @else {
+            #{ $m_value }: $unit * $i;
+          }
+        }
+      }
+      #{ $m_name }-#{ $name }-auto {
+        @if $m_name == 'mx' {
+          margin-left: auto;
+          margin-right: auto;
+        } @else if $m_name == 'my' {
+          margin-top: auto;
+          margin-bottom: auto;
+        } @else {
+          #{ $m_value }: auto
+        }
+      }
+    }
+  }
+}

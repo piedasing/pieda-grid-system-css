@@ -1,4 +1,4 @@
-$total_col: 12;
+@import './variable';
 
 .container {
   width: 100%;
@@ -20,13 +20,6 @@ $total_col: 12;
     flex: 0 0 $width;
   }
 }
-
-$mediaQuery: (
-  sm: '576px',
-  md: '768px',
-  lg: '992px',
-  xl: '1140px'
-);
 
 @each $name, $value in $mediaQuery {
   @media only screen and (min-width: $value) {
